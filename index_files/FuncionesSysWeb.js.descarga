@@ -1,0 +1,123 @@
+﻿var frmFS;
+function Ingreso()
+{
+    var obj;
+    obj = window.document.getElementById("objform");
+    if (obj != null)
+    {
+        
+       Abrir();
+       
+    }
+}
+function Abrir()
+{
+   
+    var obj;
+    obj = window.document.getElementById("objform");
+    var ArrParam = obj.value.split("-");
+	
+	
+	
+    win = window.open("", "Sitio","width=" + window.screen.width + ", height=" + window.screen.height +", left=0, top=0, menubar=no, titlebar=no, location=no, status=yes, toolbar=no, scrollbars=yes, resizable=yes");
+	win.document.write("<form name='aform' method='post' action='" + ArrParam[0] + "'>");
+	win.document.write("<input type='text' style='width: 0px; border: none;' name='Prm1'>");
+	win.document.write("<input type='text' style='width: 0px; border: none;' name='Prm2'>");
+	win.document.write("<input type='text' style='width: 0px; border: none;' name='Prm3'>");
+	win.document.write("<input type='text' style='width: 0px; border: none;' name='Prm4'>"); 
+	win.document.write("</form>");
+	win.document.aform.Prm1.value=ArrParam[1];
+	win.document.aform.Prm2.value=ArrParam[2];
+	win.document.aform.Prm3.value=ArrParam[3];
+	win.document.aform.Prm4.value=ArrParam[4];
+	win.document.aform.submit();
+	win.moveTo(0, 0);
+	win.document.focus();
+
+    if (win == null)
+        MostrarMsg();
+    else
+    {
+        obj = window.document.getElementById("objtemp");
+        obj.innerHTML = "";
+        obj = window.document.getElementById("divMsg");
+        obj.style.display = 'none';//Oculta
+        obj = window.document.getElementById("divLogin");
+        obj.style.display = '';//Muestra
+        
+    }
+    
+    
+}
+function openWin(url)
+  {
+	var d = new Date();
+	
+	
+    }
+
+function MostrarMsg()
+{
+    
+    obj = window.document.getElementById("divMsg");
+    obj.style.display = '';//Muestra
+    obj = window.document.getElementById("divLogin");
+    obj.style.display = 'none';//Oculta
+   
+}
+
+
+
+//******************************************************
+/*
+Funciones para los Botones Numéricos de Ingreso de Clave
+*/
+//******************************************************
+function IniBtnKeyPad()
+{
+	NameBtn = "btnKeyPad"
+	sec = "0123456789";
+	var iR = 0;
+	for (i = 0; i < 21; i++)
+	{
+	    iR = Math.floor(Math.random()*10);
+	    sec = iR + sec.replace(iR,"");
+	}
+	for (i = 0; i < 10; i++)
+	{
+		obj = document.getElementById(NameBtn+i);
+		
+			obj.src = "imagenes/" + sec.substring(i,i+1) +  ".jpg";
+			obj.style.cursor = "hand";
+		
+	}
+    
+    obj2 = document.getElementById("objClave");
+    obj2.value = "";
+}
+function setVal(objN)
+{
+   
+    obj = document.getElementById("txtClave");
+    iMaxLen = obj.getAttribute("maxlength");
+    
+    sVal = objN.src;
+    sVal = sVal.substring(sVal.length - 5, sVal.length - 4);
+    if (sVal=="r")
+    {
+        obj.value = "";
+    }
+    else
+    {
+        if (obj.value.length == iMaxLen)
+            return false;
+        
+        obj.value = obj.value + sVal;
+    }
+    
+    obj2 = document.getElementById("objClave");
+    obj2.value = obj.value;
+    
+    return false;
+}
+//******************************************************

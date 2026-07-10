@@ -1,0 +1,16 @@
+$(document).ready(function () {
+
+  $("#menu").mmenu({
+    "slidingSubmenus": false,
+    "classes": "mm-slide",
+    "offCanvas": {
+      "position": "right",
+      "zposition": "next"
+    }
+  });
+
+  $(".LeftMenu .RootMenu").on("click",function(){
+    $(this).parent().find(".pane").slideToggle();;
+  });
+
+});

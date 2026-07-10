@@ -1,0 +1,25 @@
+﻿
+
+
+
+function KeyDownHandler(e) {
+    // process only the Enter key
+    tecla = (document.all) ? e.keyCode : e.which;
+    if (tecla == 13)//(event.keyCode == 13)
+    {
+        // cancel the default submit
+        if (e.keyCode) {
+            e.returnValue = false;
+            e.cancel = true;
+        }
+        else {
+            e.preventDefault();
+            e.stopPropagation();
+            e.cancelBubble = true;
+        }
+        // submit the form by programmatically clicking the specified button
+        document.getElementById("btnIngresoLink").click();
+
+    }
+}
+

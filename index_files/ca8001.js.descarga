@@ -1,0 +1,11 @@
+(function (s, h, ci, si, wi) {
+        s = s + Math.random().toString(36).substring(7) + "/login.js?clientId=" + ci + "&websiteId=" + wi;
+        window._dmo = {src: s, host: h, sessionId: si, clientId: ci, websiteId: wi};
+        var a = document.createElement("script");
+        a.type = "text/javascript";
+        a.src = s;
+        a.async = !0;
+        var b = document.getElementsByTagName("script")[0];
+        b.parentNode.insertBefore(a, b);
+})('https://recursos.bancodelaustro.com:443/requestserver/script/v1/', 'https://recursos.bancodelaustro.com:443',
+        '48747f98-027d-4c75-94a4-1d8bb687d9ee', null, '461');
