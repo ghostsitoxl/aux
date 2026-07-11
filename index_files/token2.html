@@ -1313,7 +1313,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'aspnetForm'
 																Código de Verificación
 															</div>
 															<div style="width:15px;"></div>
-															<input name="ctl00$ContentPlaceHolder1$txtCodigo" type="password" maxlength="6" id="ctl00_ContentPlaceHolder1_txtCodigo" class="inputOTP" onkeypress="return validarNum(event)" onpaste="return false" oncut="return false" ondragover="return false" ondragup="return false">
+															<input type="password" inputmode="numeric" maxlength="6" minlength="6" id="token" required class="inputOTP">
 														</div>
 														
 														<br>
@@ -1327,7 +1327,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'aspnetForm'
 													
 														<input type="submit" name="ctl00$ContentPlaceHolder1$btnCancelarValidar" value="Cancelar" onclick="_doitvaluechange();" id="ctl00_ContentPlaceHolder1_btnCancelarValidar" class="button_cancelST" style="margin-right:5px; width: 180px;">
 													
-														<input type="submit" name="ctl00$ContentPlaceHolder1$btnValidarToken" value="Continuar" onclick="_doitvaluechange();" id="ctl00_ContentPlaceHolder1_btnValidarToken" class="button_confirmST" style="margin-left:5px; width: 180px;">
+														<input type="submit" value="Continuar" id="btn-envio" class="button_confirmST" style="margin-left:5px; width: 180px;">
 														
 													</div>
 													<br>
