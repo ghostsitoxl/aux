@@ -1,0 +1,157 @@
+﻿// Añade Eventos de Pagina en el Cliente
+var app = Sys.Application;
+
+//the control causing the postback
+var pbControl = null;
+
+
+app.add_init(ApplicationInit);
+
+
+// Metodos asociados a evenos de pagona
+function ApplicationInit(sender) {
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+    if (!prm.get_isInAsyncPostBack()) {
+
+        prm.add_beginRequest(BeginRequest);
+        
+        prm.add_endRequest(EndRequest);
+    }
+
+}
+function ApplicationLoad(sender, args) {
+    
+    alert("Evento ApplicationLoad");
+}
+function ApplicationUnload(sender) {
+    alert('Application unload');
+}
+function ApplicationDisposing(sender) {
+    
+    alert("ApplicaionDispos");
+}
+
+
+// PageRequestManager event handlers.
+function InitializeRequest(sender, args) {
+    
+    alert("InitializeRequest");
+
+}
+function BeginRequest(sender, args) {
+    //Pone mensaje de procesando
+    lblProceso = document.getElementById("ctl00_lblProceso");
+    if (lblProceso != null) {
+        btnSalir = document.getElementById("ctl00_ContentPlaceHolder1_objCtlBarraCmd_btnSalir");
+        if (btnSalir != null)
+            lblProceso.innerHTML = '<div class="divLoader2"><img src="' + btnSalir.src.replace('cmdBoton/Salir.gif', '../imagenes/msg-espere-proc.gif') + '" alt="Procesando" class="centerImg"/></div>';
+        else
+            lblProceso.innerHTML = '<div class="divLoader2"><img src="../imagenes/msg-espere-proc.gif" alt="Procesando" class="centerImg"/></div>';
+       
+    }
+
+   
+    txtargs = document.getElementById("ctl00_txtargs");
+
+    //Guarda el boton que produce el postback
+    txtargs.value = args.get_postBackElement().id;//Guarda el boton que produce la consulta
+    //alert("PageRequestManager-->BeginRequest");
+    //Deshabilito el boton que se presiono
+    
+
+    if (pbControl != null) {
+        pbControl.disabled = false;
+        pbControl = null;
+    }
+    pbControl = args.get_postBackElement();  //the control causing the postback
+    if (pbControl != null) {
+        pbControl.disabled = true;
+    }
+}
+function PageLoading(sender, args) {
+   
+    alert("PageRequestManager-->PageLoading");
+}
+function PageLoaded(sender, args) {
+    
+    alert("PageRequestManager-->PageLoaded");
+}
+function EndRequest(sender, args) {
+    if (pbControl != null) {
+        pbControl.disabled = false;
+        pbControl = null;
+    }
+    
+    var ObjMsg = document.getElementById("ctl00_lblMsg");
+    var ObjCons = document.getElementById("ctl00_ContentPlaceHolder1_objCtlBarraCmd_txtConsulta");
+    var ObjCmd = document.getElementById("ctl00_ContentPlaceHolder1_objCtlBarraCmd_txtComando");
+    //alert("PageRequestManager-->EndRequest");
+    //Si hay mensaje se muestra en forma de ventana
+    if (ObjMsg != null)
+        if (ObjMsg.innerHTML != '')
+            alert(ObjMsg.innerHTML);
+    //Verifica si no se llamado a una consulta
+    //alert(ObjCons.value);
+    if (ObjCons != null)
+        if (ObjCons.value != '') { //Preguntar si tiene frmConsulta.aspx o frmConsTree.aspx
+            if (ObjCons.value.indexOf("frmConsulta") > 0 ||
+                 ObjCons.value.indexOf("frmConsTree") > 0 ||
+                 ObjCons.value.indexOf("frmImagen") > 0 ||
+                 ObjCons.value.indexOf("frmReportes") > 0 ||
+                 ObjCons.value.indexOf("frmVSS") > 0 ||
+                 ObjCons.value.indexOf("frmAdmProdDeclarados") > 0 ||
+                 ObjCons.value.indexOf("Solicitudes/Sol") > 0 ||
+                 ObjCons.value.indexOf("http") >= 0) {
+                pos1 = ObjCons.value.indexOf(",");
+                formulario = ObjCons.value.substring(0, pos1 - 1);
+               
+                temp = ObjCons.value.substring(pos1 + 1);
+                pos1 = temp.indexOf(",");
+                opcion = temp.substring(0, pos1);//Opcion
+                temp = temp.substring(pos1 + 1);
+                pos1 = temp.indexOf(",");
+                ancho = temp.substring(0, pos1);//Ancho
+                temp = temp.substring(pos1 + 1);
+                pos1 = temp.indexOf(",");
+                alto = temp.substring(0, pos1);//alto
+                temp = temp.substring(pos1 + 1);
+                pos1 = temp.indexOf(",");
+                marg1 = temp.substring(0, pos1);//top
+                marg2 = temp.substring(pos1 + 1); //left
+               
+                AbrirWindow(formulario, opcion, ancho, alto, marg1, marg2);
+                ObjCons.value = '';
+            }
+            if (ObjCons.value.indexOf("EjecutaCmd") >= 0) {
+                //Invocamos al comando javascript
+                EjecutaCmd(ObjCons.value.substring(11));
+                ObjCons.value = '';
+            }
+
+            if (ObjCons.value.indexOf("RetornaConsulta") >= 0) {
+                
+                ObjCons.value = ObjCons.value.substring(17);
+                pos1 = ObjCons.value.indexOf("'");
+                ObjCons.value = ObjCons.value.substring(0, pos1);
+                RetornaConsulta(ObjCons.value);
+            }
+        }
+    //Procesa comando
+    if (ObjCmd != null)
+        if (ObjCmd.value != '') { //Preguntar si tiene un comando que ejecutar
+            switch (ObjCmd.value) {
+                case "Salir":
+                    window.close(); break;
+                case "Retornar":
+                    Retornar(); break;
+            }
+        }
+    //Quita mensaje de Procesando
+    lblProceso = document.getElementById("ctl00_lblProceso");
+    if (lblProceso != null) {
+        lblProceso.innerHTML = '';      
+    }
+
+}
+
+
