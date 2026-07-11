@@ -1,0 +1,592 @@
+BODY {
+    font-family: 'Latinotype_Texta_Medium';
+    background-color: #ffffff;
+}
+
+.a38 {
+    background-color: #092669;
+    font-style: Normal;
+    font-family: Arial;
+    font-size: 12pt;
+    color: White;
+}
+
+.a37 {
+    font-style: Normal;
+    font-family: Arial Black;
+    font-size: 12pt;
+    color: #092669;
+}
+
+.a39 {
+    font-style: Normal;
+    font-family: Arial;
+    font-size: 12pt;
+    color: #003974;
+}
+
+.a33 {
+    font-style: Normal;
+    font-family: Arial;
+    font-size: 8pt;
+    color: #003974;
+}
+
+.a5 {
+    border: 1pt Solid #003974;
+    background-color: Lavender;
+}
+
+.a12 {
+    font-style: Normal;
+    font-family: Arial Black;
+    font-size: 8pt;
+    color: #003974;
+}
+
+.a11 {
+    font-style: Normal;
+    font-family: Arial Black;
+    font-size: 8pt;
+    color: #003974;
+}
+
+.clsFondoKeyPad {
+    background-color: #003974;
+}
+
+.MsgProceso {
+    font-weight: bold;
+    font-size: 14pt;
+    font-family: 'Latinotype_Texta_Medium';
+    color: White;
+    border-color: #092669;
+    background-color: #092669;
+}
+
+.clsScrollbarDI {
+    scrollbar-base-color: #092669;
+    scrollbar-face-color: #ffffff;
+    scrollbar-shadow-color: #ffffff;
+    scrollbar-highlight-color: #efefef;
+    scrollbar-arrow-color: #003974;
+    scrollbar-dark-shadow-color: #ffffff;
+    scrollbar-track-color: #ffffff;
+    SCROLLBAR-3DLIGHT-COLOR: #ffffff;
+}
+
+.clsTituloDI {
+    color: #003399;
+    font-size: 14pt;
+    font-family: Latinotype_Texta_Medium;
+    height: 18px;
+    vertical-align: text-top;
+    border-color: #003974;
+    border-width: 1;
+    font-weight: bold;
+}
+
+.clsSubTituloDI {
+    color: #3366ff;
+    font-size: 10pt;
+    font-family: Latinotype_Texta_Medium;
+    height: 18px;
+    vertical-align: text-top;
+    border-color: #003974;
+    border-width: 1;
+    font-weight: bold;
+}
+
+.clsEtiTituloDI {
+    color: #0000cc;
+    font-size: 9pt;
+    font-family: Latinotype_Texta_Medium;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.clsEtiItemDI {
+    color: #0000cc;
+    font-size: 9pt;
+    font-family: Latinotype_Texta_Medium;
+    border-style: none;
+}
+
+.clsEtiquetaDI {
+    color: #0000cc;
+    font-size: 8pt;
+    font-family: Latinotype_Texta_Medium;
+    height: 18px;
+    vertical-align: text-top;
+    border-color: #003974;
+    border-width: 1;
+    font-weight: bold;
+    background-color: #eff6ff;
+}
+
+.clsDatosDI {
+    color: #000000;
+    font-size: 8pt;
+    font-family: Latinotype_Texta_Medium;
+    height: 18px;
+    vertical-align: text-top;
+    border-color: #003974;
+    border-width: 1;
+    font-weight: normal;
+}
+
+.clsVerDI {
+    color: #003333;
+    font-size: 8pt;
+    font-family: Latinotype_Texta_Medium;
+    height: 14px;
+    vertical-align: text-top;
+    border-color: #003974;
+    border-width: 1;
+}
+
+.clsLinks {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    color: White;
+}
+
+.clsFondoLinks {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #003974;
+    /*background-image:url(./imagenes/fondo-link.jpg);*/
+}
+
+.clsMsgCabecera {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    text-align: center;
+    vertical-align: middle;
+    color: #003974;
+    font-weight: bold;
+}
+
+.clsFuente {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    color: Black;
+    background: #003974;
+}
+
+.clsFuenteN {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    color: Black;
+}
+
+.clsFuenteA {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    color: #092669;
+}
+
+.clsFuenteAF {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    color: #003974;
+    font-weight: normal;
+}
+
+.clsFuenteAF_Reg {
+    font-size: 12px;
+    font-family: Latinotype_Texta_Medium;
+    color: #003974;
+    font-weight: bold;
+}
+
+.clsFuenteAFP {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    color: White;
+    font-weight: normal;
+}
+
+.clsFuenteAR {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    font-style: italic;
+    color: Red;
+    font-weight: bold;
+}
+
+.clsFuenteB {
+    font-size: 12px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: White;
+}
+
+.clsFuenteC {
+    /*font-size: 12px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: #092669;*/
+    font-size: 12px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: White;
+}
+
+.clsFuenteC_Reg {
+    font-size: 13px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bolder;
+    color: Blue;
+}
+
+.clsFuenteD {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    color: #092669;
+}
+
+.clsFuenteE {
+    font-size: 10px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: #ebe7e6;
+}
+
+.clsFuenteUsu {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: red;
+}
+
+.clsDatos {
+    color: #003974;
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    vertical-align: text-top;
+    border-color: #003974;
+    border-width: 1;
+    margin-bottom: 0px;
+}
+
+.clsDatosM {
+    color: #003974;
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    background-color: #EBF8FF;
+    height: 18px;
+    vertical-align: text-top;
+    border-color: #003974;
+    border-width: 1;
+}
+
+.clsDatosL {
+    color: #003974;
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    background-color: #ECEFFF;
+    height: 18px;
+    vertical-align: text-top;
+    border-color: #003974;
+    border-width: 1;
+}
+
+.clsEnlace {
+    font-size: 9px;
+    font-style: italic;
+    font-family: Latinotype_Texta_Medium;
+    color: #003974;
+    font-weight: bold;
+}
+
+.clsMensaje {
+    font-size: 15px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: Black;
+}
+
+.clsTexto {
+    color: #092669;
+    font-size: 12px;
+    font-family: Latinotype_Texta_Medium;
+}
+
+.clsTexto_Reg {
+    color: #092669;
+    font-size: 13px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+}
+
+.clsDGHeader {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: #003974;
+    outline-color: #003974;
+    background-color: White;
+}
+
+.clsDGBody {
+    font-size: 9px;
+    font-family: Latinotype_Texta_Medium;
+    color: #003974;
+}
+
+.clsDGFooter {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    background-color: White;
+    color: #003974;
+}
+
+.clsDGSelItem {
+    font-size: 9px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: #092669;
+}
+
+.clsDGPager {
+    font-size: 9px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: #092669;
+}
+
+@font-face {
+    font-family: Latinotype_Texta_Heavy;
+    src: url("../Productos/Styles/FONTS/Latinotype - Texta Heavy.otf") format("opentype");
+}
+
+.clsTitulo {
+    font-size: 11px;
+    font-weight: bold;
+    font-family: Latinotype_Texta_Medium;
+    color: #092669;
+}
+
+.clsTituloNivel1 {
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Latinotype_Texta_Medium;
+    color: Black;
+}
+
+.clsSubTitulo {
+    /*color: #003974; 
+	font-size:11px;
+	font-family: Latinotype_Texta_Medium;*/
+    color: #000000;
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+}
+
+.clsSubTituloNivel1 {
+    font-size: 12px;
+    font-family: Latinotype_Texta_Medium;
+    color: Black;
+}
+
+.MenuBar {
+    background: #3399ff;
+}
+
+.clsFondoMenu {
+    background-color: #092669;
+}
+
+.clsFondoLink {
+    background-color: #092669;
+}
+
+.clsFondoForm {
+    background-color: #ffffff;
+}
+
+.bgColor {
+    background-color: #f7f7f7;
+}
+
+.frmPantalla {
+    background-color: #f7f7f7;
+}
+
+.clsFondoBarraCmd {
+    background-color: #1f3a82;
+}
+
+.ColorMenu {
+    background-color: red;
+}
+
+.clsMenuLocal {
+    font-size: 12px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: Blue;
+}
+
+.clsPubli {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    text-align: center;
+    background-image: url(./imagenes/fondo-publicidad.jpg);
+    vertical-align: middle;
+    color: #ffffff;
+}
+
+.clsPie {
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #ffffff;
+}
+
+.clsColorFondo {
+    background: #003974;
+}
+
+.clsLineaBorde {
+    color: #33ccff;
+}
+
+.clsMsg {
+    color: Red;
+    font-weight: bold;
+    font-size: 12px;
+    font-style: italic;
+    font-family: Latinotype_Texta_Medium;
+}
+
+.clsVinueta {
+    background-image: url(./imagenes/pnlBoton/fondo.gif);
+    font-weight: bold;
+    font-family: Latinotype_Texta_Medium;
+    font-size: 11px;
+    color: White;
+}
+
+.clsVinueta_over {
+    background-image: url(./imagenes/pnlBoton/fondo_over.gif);
+    font-weight: bold;
+    font-family: Latinotype_Texta_Medium;
+    font-size: 11px;
+    color: #016798;
+}
+
+.clsMenu {
+    background-color: #FFFFFF;
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.clsMenuItemOver {
+    color: #FFEE00;
+    background-color: #003974;
+    font-weight: bold;
+    font-family: Latinotype_Texta_Medium;
+    font-size: 11px;
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.clsMenuItem {
+    background-color: #003974;
+    color: white;
+    font-family: Latinotype_Texta_Medium;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.clsMenuPrin {
+    background-color: #003974;
+    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.clsMenuItemPrin {
+    color: #FFFFFF;
+    font-family: Latinotype_Texta_Medium;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0px;
+    padding-right: 2px;
+}
+
+.clsMenuItemPrinSel {
+    color: #FFFFFF;
+    font-family: Latinotype_Texta_Medium;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0px;
+    padding-right: 2px;
+}
+
+.clsMenuItemPrinOver {
+    color: #FFFFFF;
+    font-family: Latinotype_Texta_Medium;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 0px;
+    padding-right: 2px;
+}
+
+.clsFormulario {
+    background-color: white;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: Latinotype_Texta_Medium;
+    height: 16px;
+}
+
+.clsTreeOver {
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Latinotype_Texta_Medium';
+    color: White;
+    background-color: #092669;
+    border-color: White;
+}
+
+.clsTree {
+    font-size: 9px;
+    font-family: Latinotype_Texta_Medium;
+    font-weight: bold;
+    color: Black;
+}
+
+.ColorBarra {
+    background-color: #ffffff;
+}
+
+.clsFondoMenuSec {
+    /*background-image:url(./imagenes/fondo-link.jpg);*/
+    background-color: #1C256A;
+}
+
+.clsMenuDMSxIE {
+    z-index: 50;
+}
+
+/*Aniadidos por cambio defs imagen*/
+.clsGeneral1 {
+    background-color: #f7f7f8;
+}
+
+.clsGeneral2 {
+    background-color: #003974;
+}

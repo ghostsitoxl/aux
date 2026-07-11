@@ -1,0 +1,228 @@
+function FormatDate(InpDate)
+{
+if(InpDate == "")
+    {
+    alert("Ingrese un valor (mm-dd-yyyy)");
+    return false;
+    }
+else
+   {
+      if(InpDate.length < 6) 
+    {
+         alert("Fecha Incorrecta (mm-dd-yyyy)");
+     return false;
+    }
+      else
+      {
+        InpVal = InpDate;
+        SendNext = "False";
+        PrevSlash = "";
+        LastSlash = "";
+        for(i = 0;i <= InpDate.length-1;i++)
+        {
+          PrevSlash = LastSlash;
+          LastSlash = InpDate.substring(i,i+1);
+        if((LastSlash == '/' && i == 0 ))
+            {
+                alert("Fecha Incorrecta (mm-dd-yyyy)");
+                return false;
+                 break;    
+            }
+          if ((LastSlash == '/' ) && (PrevSlash == '/'))
+            {
+                alert("Fecha Incorrecta (mm-dd-yyyy)");
+                return false;
+                 break;
+            }
+          else 
+            {
+                if (LastSlash == '/' || LastSlash == '-') 
+                SendNext = "True";
+            } 
+       } 
+    if (SendNext == "True") 
+        {
+            lBool="False";
+            LMonth="False";
+            LDate="False";
+            var OutVal;
+            var InVal;
+            var RoundYear;
+            var Mon;
+            var LastSlashNumber;
+            var j;
+            var k;
+            var x;
+            x = InpDate;
+            OutVal="";
+            TotVal="";
+            LastSlashNumber=0;
+            for(i = 0;i <= x.length-1;i++) 
+               {
+                  LastSlash = x.substring(i,i+1);
+                  if (LastSlash != 0 && LastSlash != 1 && LastSlash != 2 && LastSlash != 3 && LastSlash != 4 && LastSlash != 5 && LastSlash != 6 && LastSlash != 7 && LastSlash != 8 && LastSlash != 9 && LastSlash != '-' && LastSlash != '/') //fifth if
+                    {
+                        lBool="True";
+                        break;
+                    }
+                  else 
+                    {
+                      if (LastSlash == '/' || LastSlash == '-' || LastSlashNumber == 2 ) //sixth if
+                          {
+                            InVal = OutVal;
+                            if (InVal == '0' || InVal == '00' || InVal == '0000') //seventh if
+                                {
+                                    alert("Fecha Incorrecta (mm-dd-yyyy)")
+                                    return false;
+                                    break;
+                                }
+                                TotVal = TotVal+InVal
+                                OutVal="";
+                                   if (LastSlashNumber == 0  )
+                                    {
+                                        LastSlashNumber  = LastSlashNumber + 1;
+                                        Mon = InVal;
+                                        if (InVal > 12)
+                                            {
+                                                LMonth ="True";
+                                                InVal="";
+                                                break;
+                                            }
+                                    }
+                               else
+                                    {
+                                           if(LastSlashNumber == 1)
+                                            {
+                                                Dat = InVal;
+                                                LastSlashNumber  = LastSlashNumber + 1;
+                                                if(Mon == '01' || Mon == '1' || Mon == '03' || Mon == '3' || Mon == '05' || Mon == '5' || Mon == '07' || Mon == '7' || Mon == '08' || Mon == '8' || Mon == '10' || Mon == '12')
+                                                    {
+                                                          if (InVal > 31)
+                                                            {
+                                                                  LDate ="True";
+                                                                   InVal="";
+                                                                  break;
+                                                            }
+                                                    }
+                                                else
+                                                       {
+                                                        if(Mon == '04' || Mon == '4' || Mon == '06' || Mon == '6' || Mon == '09' || Mon == '9' || Mon == '11')
+                                                           {
+                                                                if (InVal > 30)
+                                                                    {
+                                                                          LDate ="True";
+                                                                           InVal="";
+                                                                          break;
+                                                                    }
+                                                            }        
+                                                          }
+                                            }
+                                    else
+                                        {
+                                            if(LastSlashNumber == 2 )
+                                                   {
+                                                    LastSlashNumber = LastSlashNumber + 1;
+                                                    lYear = x.substring(TotVal.length+2,x.length);
+                                                    if(lYear == '0000')
+                                                        {
+                                                            alert("Fecha Incorrecta (mm-dd-yyyy)")
+                                                            return false;                        
+                                                        }
+                                                    else
+                                                        {
+                                                            if(lYear.length <= 3 )
+                                                                {
+                                                                    alert("Fecha Incorrecto (mm-dd-yyyy)");
+                                                                    return false;
+                                                                    break;
+                                                                }
+                                                            else
+                                                                {
+                                                                       if(lYear.length > 4 )
+                                                                        {
+                                                                            alert("Fecha Incorrecto (mm-dd-yyyy)");
+                                                                            return false;
+                                                                            break;
+                                                                        }
+                                                                       else
+                                                                        {
+                                                                             RoundYear = Math.round(lYear/4); 
+                                                                             if (lYear/4 != RoundYear) 
+                                                                                {
+                                                                                    if(Mon == 2 && Dat > 28 )
+                                                                                        {
+                                                                                            alert("Dia Incorrecto en Febrero (mm-dd-yyyy)");
+                                                                                            return false;
+                                                                                            break;
+                                                                                        }
+                                                                                    else
+                                                                                    {
+                                                                                 
+                                                                                    return true;
+                                                                                    }
+                                                                                   }
+                                                                            else
+                                                                                   {
+                                                                                    if(Mon == 2 && Dat > 29)
+                                                                                        {
+                                                                                            alert("Dia Incorrecto en Febrero (mm-dd-yyyy)");
+                                                                                            return false;
+                                                                                            break;
+                                                                                        }
+                                                                                    else
+                                                                                        {
+                                                                                    
+                                                                                        return true;
+                                                                                        }
+                                                                                   }
+                                                                        }
+                                                                }
+                                                           }
+                                                }    
+                                                else
+                                                {
+                                              
+                                                return true;
+                                                }
+                                            }
+                                       }
+                                }
+                                       else
+                                        OutVal=OutVal + LastSlash;
+                            }
+                        }
+                    }
+            else
+                {
+                    alert("Fecha Incorrecta (mm-dd-yyyy)");
+                    return false;
+                }
+             }
+    }
+    if (lBool == "True")
+        {
+            alert("Fecha Incorrecta (mm-dd-yyyy)");
+            return false;
+        }
+    else
+        {
+            if (LMonth == "True")
+                {
+                    alert("Mes incorrecto (mm-dd-yyyy)");
+                    return false;
+                }
+            else
+                {
+                    if (LDate == "True")
+                        {
+                            alert("Fecha Incorrecta (mm-dd-yyyy)");
+                            return false;
+                        }
+                    else
+                        {
+                  
+                        return true;
+                        }
+                }
+        }
+}

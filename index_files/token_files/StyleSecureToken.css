@@ -1,0 +1,258 @@
+:root {
+  --azul-oscuro: #00166A;
+  --azul-claro: #003057;
+  --azul-medio: #00195a;
+  --azul-normal: #0a1036;
+  --azul-antiguo: #1c2b4d;
+  --blanco-oscuro: #ffffff;
+  --gris-grupo: #e0e0e0;
+  --gris-input: #f2f2f2;
+  --gris-tabla: #e6e7ea;
+  --gris-hr: #706f6f;
+  --bgc-white: #ffffff;
+  --grispaginado: #707070;
+  --amarillo-claro: #ffb71b;
+  --amarillo-oscuro: #FFB71B;
+  --azul-oscuro-dialog: #06255b;
+  --rojo: #e1001e;
+  --blanco: #d9d9d1;
+  --font-family-light: 'Assistant-Light';
+  --font-family-extralight: 'Assistant-ExtraLight';
+  --font-family-extrabold: 'Assistant-ExtraBold';
+  --font-family-semibold: 'Assistant-SemiBold';
+  --font-family-medium: 'Assistant-Medium';
+  --font-family-regular: 'Assistant-Regular';
+  --font-family-bold: 'Assistant-Bold';
+  --color-text: #666666;
+  --blue-titles: #4361D7;
+  --forAll-backg: #F5F9FF;
+  --blue-titles: #4361D7;
+  --otp-borderColor: #D3D2D2;
+}
+@font-face {
+    font-family: Assistant-ExtraLight;
+    src: url("fonts/Assistant-ExtraLight.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: Assistant-ExtraBold;
+    src: url("fonts/Assistant-ExtraBold.ttf") format("opentype");
+}
+ 
+@font-face {
+    font-family: Assistant-SemiBold;
+    src: url("fonts/Assistant-SemiBold.ttf") format("opentype");
+}
+ 
+@font-face {
+    font-family: Assistant-Regular;
+    src: url("fonts/Assistant-Regular.ttf") format("truetype");
+}
+ 
+@font-face {
+    font-family: Assistant-Bold;
+    src: url("fonts/Assistant-Bold.ttf") format("opentype");
+}
+ 
+@font-face {
+    font-family: Assistant-Medium;
+    src: url("fonts/Assistant-Medium.ttf") format("opentype");
+}
+
+.headerSecureTokenTerms{
+	height: 50px;
+	width: 1%;
+	background-color: var(--bgc-white);
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 40px;
+	padding-right: 40px;
+	text-align:left;
+}
+
+.headerTextST{
+	padding:10px;
+	font: 24px Assistant-SemiBold, Helvetica;
+	color: var(--blue-titles);
+	margin-bottom:15px;
+}
+
+.button_confirmST {
+  background-color: var(--azul-oscuro) !important;
+  color: white !important;
+  font: 15px Assistant-SemiBold, Helvetica !important;
+  padding: 5px;
+  border: 1px solid var(--azul-oscuro);
+  border-radius: 5px;
+  height: 32px;
+  width: 250px;
+  cursor: pointer;
+}
+.button_cancelST {
+  background-color: white !important;
+  color: var(--azul-oscuro) !important;
+  font: 15px Assistant-SemiBold, Helvetica !important;
+  padding: 5px;
+  border: 1px solid var(--azul-oscuro);
+  border-radius: 5px;
+  height: 32px;
+  width: 250px;
+  cursor: pointer;
+}
+
+.contenedorBlank {
+  width:95%;
+  padding-left: 20px; /* Espacio alrededor del texto */
+  padding-right: 20px; /* Espacio alrededor del texto */
+  padding-superior: 10px;
+  padding-inferior: 10px;
+  background-color: #ffffff !important; /* Fondo blanco */
+  border-radius: 2px; /* Bordes redondeados */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  display: inline-block; /* Para que el div se ajuste al contenido */
+  margin-bottom:150px;
+}
+.centerCont{
+	text-align:center;
+}
+
+.internalContainer {
+    margin: 0 auto;
+    display: table;
+    width: 1px;
+    margin-bottom: 10px;
+}
+
+.headerCodSecurity {
+    background-color: #ffffff;
+    height: 20px;
+}
+
+.dataContainer {
+    width: 740px;
+    margin: 4px;
+    text-align: initial !important;
+}
+.textAux {
+    font: 16px Assistant-SemiBold, Helvetica;
+    color: var(--azul-oscuro);
+}
+
+.textDescription{
+	font: 16px Assistant-Regular, Helvetica;
+    color: var(--color-text);
+}
+
+.nameTextStyle{
+	font: 20px Assistant-SemiBold, Helvetica;
+	color: var(--azul-oscuro);
+}
+
+
+.dropdownData {
+    width: 270px; /* Ancho personalizado */
+    font: 16px Assistant-Regular, Helvetica; /* Tipo de letra personalizado */
+    color: #333; /* Color de texto personalizado */
+    border: 2px solid rgba(204, 204, 204, 0.5); /* Borde del DropDownList */
+    border-radius: 7px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+}
+
+.nameClient {
+	font: 16px Assistant-SemiBold, Helvetica;
+    color: var(--azul-oscuro);
+}
+
+.newbgColor {
+	background-color: var(--forAll-backg);
+}
+
+.textSaldoDisp{
+	font: 13px Assistant-Regular, Helvetica;
+    color: var(--azul-oscuro);
+	margin-top:15px;
+	text-align:center;
+}
+
+.separatorTransactionST {
+	border-top:solid 2px #E0E0E0;
+	height:0px
+	
+}
+
+.textError {
+    font: 13px Assistant-Bold, Helvetica;
+    text-align: center;
+}
+
+.colorError {
+    color: #d00000;
+}
+
+.capitalizeText{
+	display:inline-block;
+    text-transform: lowercase !important;
+}
+ 
+.capitalizeText::first-letter{
+    text-transform: uppercase !important;
+}
+
+.textWithPointCap{
+	display:inline-block;
+}
+
+.textAToken {
+	font: 16px Assistant-Regular, Helvetica  !important;
+	color: var(--color-text);
+}
+
+.textATokenBold {
+	font: 16px Assistant-SemiBold, Helvetica !important;
+	color: var(--color-text);
+}
+
+.centerTokenInfo {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.inputOTP{
+     /* background-color: #e0e0e0; */
+     border-width:1px;
+     border-color:var(--otp-borderColor);
+	 border-style:solid;
+     color: #1C256A;
+     font-size: 16px;
+     font-family: Assistant-SemiBold;
+     text-align:center;
+     line-height: 13px;
+     width: 220px;
+     height: 30px;
+	 border-radius: 5px;
+	outline: none; 
+}
+.inputOTP:focus {
+    border-width: 1px; /* Mantiene el mismo ancho del borde al hacer foco */
+	border-color: var(--otp-borderColor);
+	outline: none; 
+}
+
+.otpMssg {
+  color: var(--color-text);
+  text-align: center;
+  vertical-align: middle;
+  font-size: 16px;
+  font-family: Assistant-Regular, Helvetica;
+}
+
+.headerImgOtp{
+  text-align: center;
+  margin: 2px;
+}
+
+.textDetalle{
+	text-align: center;
+	font: 16px Assistant-Regular, Helvetica;
+	color: var(--color-text);
+}

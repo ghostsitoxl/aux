@@ -1,0 +1,1 @@
+var __sl_matchers=[{protocol:/http|https/, host:/^.*/, path:/^\/AppInt\/BaustroOnline\/bancavirtual\/personas\/.*?/, method:'ANY'},{protocol:/http|https/, host:/^.*/, path:/^\/AppInt\/webEstablecimientos\/wfLogin\.aspx.*?/, method:'ANY'},{protocol:/http|https/, host:/^.*/, path:/^\/AppInt\/BaustroOnline\/webCreacionUsuario\/creacion-usuario\/reseteo-clave.*?/, method:'ANY'}];
